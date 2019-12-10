@@ -16,14 +16,19 @@ function ToDoForm(props) {
         onChange={handleChanges}
       />
       <button
-        theme="primary"
         onClick={() => {
           props.dispatch({ type: "ADD_TODO", payload: toDo });
         }}
       >
         Add ToDo
       </button>
-      <button>Clear Completed</button>
+      <button
+        onClick={() => {
+          props.dispatch({ type: "CLEAR_TODO" });
+        }}
+      >
+        Clear Completed
+      </button>
     </form>
   );
 }
