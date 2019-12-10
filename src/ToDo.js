@@ -8,9 +8,9 @@ function ToDo(props) {
   return (
     <div id="mytodo" className={props.toDo.completed ? "completed" : ""}>
       <p
-        onClick={() =>
-          props.dispatch({ type: "COMPLETE_TODO", payload: props.toDo.id })
-        }
+        onClick={() => {
+          props.dispatch({ type: "COMPLETE_TODO", payload: props.toDo.id });
+        }}
       >
         {props.toDo.toDo}
       </p>
