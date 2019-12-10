@@ -12,11 +12,13 @@ const ListOfToDos = props => {
   return (
     <div className="list-of-todos">
       {props.state.toDos.map(thing => (
-        <div className="todo">
+        <div key={thing.id} className="todo">
+          {console.log(thing.id)}
           <ToDo
             dispatch={props.dispatch}
             toDos={props.state.toDos}
             toDo={thing}
+            key={thing.id}
           />
         </div>
       ))}

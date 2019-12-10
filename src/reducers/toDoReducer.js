@@ -27,6 +27,56 @@ export const toDoReducer = (state, action) => {
         ...state,
         toDos: state.toDos.filter(todo => !todo.completed)
       };
+    case "TOGGLE_EDIT_TODO":
+      const editedToDos = [...state.toDos];
+      editedToDos.map(toDo => {
+        if (toDo.id === action.payload) {
+          toDo.edited = !toDo.edited;
+        }
+      });
+      return {
+        ...state,
+        toDos: editedToDos
+      };
+    case "COMPLETE_TODO":
+      const completedToDos = [...state.toDos];
+      completedToDos.map(toDo => {
+        if (toDo.id === action.payload) {
+          toDo.completed = !toDo.completed;
+        }
+      });
+      return {
+        ...state,
+        toDos: completedToDos
+      };
+
+    case "REMOVE_TODO":
+      const deletedToDos = [...state.toDos];
+      deletedToDos.map(toDo => {
+        if (toDo.id === action.payload) {
+          deletedToDos.splice(deletedToDos.indexOf(toDo), 1);
+        }
+      });
+      return {
+        ...state,
+        toDos: deletedToDos
+      };
+    case "CHANGE_TODO":
+      const changedToDos = [...state.toDos];
+      changedToDos.map(toDo => {
+        if (toDo.id === action.payload.id) {
+          changedToDos.splice(changedToDos.indexOf(toDo), 1, {
+            toDo: action.payload.changedToDo,
+            completed: false,
+            id: Date.now(),
+            edited: false
+          });
+        }
+      });
+      return {
+        ...state,
+        toDos: changedToDos
+      };
     default:
       return state;
   }
