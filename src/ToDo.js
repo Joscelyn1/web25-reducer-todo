@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ListGroupItem, Button, FormInput, Form } from "shards-react";
+import { Icon } from "@material-ui/core";
 
 function ToDo(props) {
   const [changedToDo, setChangedToDo] = useState("");
@@ -6,31 +8,34 @@ function ToDo(props) {
     setChangedToDo(e.target.value);
   };
   return (
-    <div id="mytodo" className={props.toDo.completed ? "completed" : ""}>
+    <ListGroupItem
+      id="mytodo"
+      className={props.toDo.completed ? "completed" : ""}
+    >
       <p
-        onClick={() => {
-          props.dispatch({ type: "COMPLETE_TODO", payload: props.toDo.id });
-        }}
+        onClick={() =>
+          props.dispatch({ type: "COMPLETE_TODO", payload: props.toDo.id })
+        }
       >
         {props.toDo.toDo}
       </p>
-      <div
+      <Icon
         onClick={() =>
           props.dispatch({ type: "TOGGLE_EDIT_TODO", payload: props.toDo.id })
         }
       >
         edit
-      </div>
-      <div
+      </Icon>
+      <Icon
         onClick={() =>
           props.dispatch({ type: "REMOVE_TODO", payload: props.toDo.id })
         }
       >
         close
-      </div>
+      </Icon>
       {props.toDo.edited ? (
-        <div onSubmit={e => e.preventDefault()}>
-          <input
+        <Form onSubmit={e => e.preventDefault()}>
+          <FormInput
             className="todo-input"
             type="text"
             id="edit-todo-form"
@@ -38,7 +43,7 @@ function ToDo(props) {
             name="editedToDo"
             value={changedToDo}
           />
-          <button
+          <Button
             onClick={() =>
               props.dispatch({
                 type: "CHANGE_TODO",
@@ -47,12 +52,12 @@ function ToDo(props) {
             }
           >
             submit
-          </button>
-        </div>
+          </Button>
+        </Form>
       ) : (
         ""
       )}
-    </div>
+    </ListGroupItem>
   );
 }
 
